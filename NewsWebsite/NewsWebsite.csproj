@@ -4,9 +4,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="img\logo.png" />
-    <Content Include="img\tim.png" />
-  </ItemGroup>
-
 </Project>
