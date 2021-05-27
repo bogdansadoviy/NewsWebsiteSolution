@@ -1,0 +1,53 @@
+﻿@using System.Linq;
+
+@model IEnumerable<NewsWebsite.Models.NewsViewModel>
+
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<link rel="stylesheet" type="text/css" href="/css/good_style.css" />
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th>
+                Tags
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    @Html.HiddenFor(modelItem => item.Content)
+    @Html.HiddenFor(modelItem => item.TitleImagePath)
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @string.Join(", ", item.Tags.Where(_ => _.IsSelected).Select(_ => _.Name))
+            </td>
+            <td>
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-sm btn-primary" asp-action="DeleteConfirmed" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

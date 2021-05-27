@@ -1,0 +1,56 @@
+﻿@model NewsWebsite.Models.NewsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<link rel="stylesheet" type="text/css" href="/css/good_style.css" />
+
+<h1>Create</h1>
+
+<h4>News</h4>
+<hr />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <textarea asp-for="Title" class="form-control"></textarea>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea style="height: 300px" asp-for="Content" class="form-control"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TitleImagePath" class="control-label"></label>
+                <input asp-for="TitleImagePath" class="form-control" />
+                <span asp-validation-for="TitleImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label"></label>
+                <div>
+                    @for (int i = 0; i < Model.Tags.Count; i++)
+                    {
+                        <input asp-for="@Model.Tags[i].IsSelected" />
+                        <label style="margin: 0 20px 0 0">@Model.Tags[i].Name</label>
+                        @Html.Hidden($"Tags[{i}].Id", @Model.Tags[i].Id)
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

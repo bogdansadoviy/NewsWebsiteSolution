@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace NewsWebsite.Controllers
@@ -17,6 +18,7 @@ namespace NewsWebsite.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult News(int newsId)
         {
             return View();
