@@ -1,6 +1,7 @@
 ﻿using NewsWebsite.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -10,10 +11,14 @@ namespace NewsWebsite.Models
     {
         public int Id { get; set; }
         [Required]
+        [DisplayName("Заголовок")]
         public string Title { get; set; }
         [Required]
+        [DisplayName("Текст")]
         public string Content { get; set; }
+        [DisplayName("Зображення")]
         public string TitleImagePath { get; set; }
+        [DisplayName("Дата і час виходу")]
         public DateTime DateAdded { get; set; }
         public List<TagViewModel> Tags { get; set; }
 

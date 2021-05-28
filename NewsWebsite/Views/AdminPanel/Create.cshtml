@@ -6,9 +6,9 @@
 
 <link rel="stylesheet" type="text/css" href="/css/good_style.css" />
 
-<h1>Create</h1>
+<h1>Створення нової новини</h1>
 
-<h4>News</h4>
+<h4>Створення нової новини</h4>
 <hr />
 <div class="row">
     <div class="col-md">
@@ -25,12 +25,12 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TitleImagePath" class="control-label"></label>
+                <label asp-for="TitleImagePath" class="control-label">Зображення для новини</label>
                 <input asp-for="TitleImagePath" class="form-control" />
                 <span asp-validation-for="TitleImagePath" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tags" class="control-label"></label>
+                <label asp-for="Tags" class="control-label">Теги</label>
                 <div>
                     @for (int i = 0; i < Model.Tags.Count; i++)
                     {
@@ -41,14 +41,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Зберегти" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Повернутись до списку новин</a>
 </div>
 
 @section Scripts {
