@@ -1,0 +1,30 @@
+﻿@model List<NewsWebsite.Models.NewsViewModel> 
+
+<link rel="stylesheet" href="~/css/style_all.css" />
+
+<style>
+    .last_list a:visited {
+        color: white;
+    }
+</style>
+
+<div class="holder">
+    <input type="checkbox" class="read-more-checker" id="read-more-checker" />
+    <div class="limited l-200">
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="new">
+                <a href="@Url.Action("News", "News", new { newsId = Model[i].Id })">
+                    <h1>@Model[i].Title</h1>
+                    <p>
+                        @Model[i].Content
+                    </p>
+                </a>
+            </div>
+        }
+
+        <div class="bottom"></div>
+    </div>
+    <label for="read-more-checker" class="read-more-button"></label>
+</div>

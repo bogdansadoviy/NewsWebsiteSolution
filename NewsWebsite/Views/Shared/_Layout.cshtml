@@ -2,17 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - NewsWebsite</title>
 
     <link rel="stylesheet" type="text/css" href="~/lib/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="~/lib/slick/slick-theme.css" />
 
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
-    <link rel="stylesheet" href="~/css/style_all.css" />
-    <link rel="stylesheet" href="~/css/style_stat.css" />
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"
@@ -20,11 +16,22 @@
     <script src="~/lib/slick/slick.js"
             type="text/javascript"
             charset="utf-8"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    @if (this.ViewContext.RouteData.Values["controller"].ToString() != "News")
+    {
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css" />
+
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="/css/good_style.css" />
+
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    }
 
 </head>
 <body>
@@ -33,32 +40,35 @@
             <div class="logo-left">
                 <a href="/" class="none">Кругозір<span class="ua">.ua</span></a><span class="date"></span>
             </div>
-            <div class="hamburger-menu">
-                <input id="menu__toggle" type="checkbox" />
-                <label class="menu__btn" for="menu__toggle">
-                    <span></span>
-                </label>
-                <ul class="menu__box">
-                    <li>
-                        <a class="menu__item" href="/"><img class="logo_img" src="img/logo.png"></a>
-                    </li>
-                    <li>
-                        @Html.ActionLink("Суспільство", "News", null, htmlAttributes: new { @class = "menu__item" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("Політика", "News", null, htmlAttributes: new { @class = "menu__item" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("Економіка", "News", null, htmlAttributes: new { @class = "menu__item" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("За кордоном", "News", null, htmlAttributes: new { @class = "menu__item" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("Курйози", "News", null, htmlAttributes: new { @class = "menu__item" })
-                    </li>
-                </ul>
-            </div>
+            @if (this.ViewContext.RouteData.Values["controller"].ToString() == "News" && this.ViewContext.RouteData.Values["action"].ToString() == "Index")
+            {
+                <div class="hamburger-menu">
+                    <input id="menu__toggle" type="checkbox" />
+                    <label class="menu__btn" for="menu__toggle">
+                        <span></span>
+                    </label>
+                    <ul class="menu__box">
+                        <li>
+                            <a class="menu__item" href="/"><img class="logo_img" src="img/logo.png"></a>
+                        </li>
+                        <li>
+                            @Html.ActionLink("Суспільство", "News", null, htmlAttributes: new { @class = "menu__item" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Політика", "News", null, htmlAttributes: new { @class = "menu__item" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Економіка", "News", null, htmlAttributes: new { @class = "menu__item" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("За кордоном", "News", null, htmlAttributes: new { @class = "menu__item" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Курйози", "News", null, htmlAttributes: new { @class = "menu__item" })
+                        </li>
+                    </ul>
+                </div>
+            }
         </header>
         <div class="content">
             @RenderBody()
@@ -70,7 +80,7 @@
             Усі представлені новини є вигаданими та не відповідають дійсності.
         </div>
         <p class="footer_logo">
-            <a href="index.html" class="none">Кругозір<span class="footer_ua">.ua</span></a>
+            <a href="/" class="none">Кругозір<span class="footer_ua">.ua</span></a>
         </p>
         <p class="footer_text">Гумористичне видавництво<br />"Кругозір.юа"</p>
         <p class="c">©2021</p>

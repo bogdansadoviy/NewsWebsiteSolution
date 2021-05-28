@@ -1,111 +1,49 @@
-﻿<div class="content">
-    <div class="block1">
-        <h1>Apple заробили 20 млрд. доларів на продажі лайна</h1>
-        <div class="img"><a href=stat.html>Економіка</a> | <a href=stat.html>За кордоном</a></div>
-        <img src="~/img/tim.png" />
-        <p class="big">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-            placeat culpa dignissimos sunt suscipit? Corporis ut quasi
-            architecto consequatur blanditiis repudiandae dolore rem! Nemo
-            libero illo modi deleniti dicta ducimus.
-        </p>
-        <p class="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-            placeat culpa dignissimos sunt suscipit? Corporis ut quasi
-            architecto consequatur blanditiis repudiandae dolore rem! Nemo
-            libero illo modi deleniti dicta ducimus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-            placeat culpa dignissimos sunt suscipit? Corporis ut quasi
-            architecto consequatur blanditiis repudiandae dolore rem! Nemo
-            libero illo modi deleniti dicta ducimus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-            placeat culpa dignissimos sunt suscipit? Corporis ut quasi
-            architecto consequatur blanditiis repudiandae dolore rem! Nemo
-            libero illo modi deleniti dicta ducimus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-            placeat culpa dignissimos sunt suscipit? Corporis ut quasi
-            architecto consequatur blanditiis repudiandae dolore rem! Nemo
-            libero illo modi deleniti dicta ducimus.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-            placeat culpa dignissimos sunt suscipit? Corporis ut quasi
-            architecto consequatur blanditiis repudiandae dolore rem! Nemo
-            libero illo modi deleniti dicta ducimus.
-        </p>
+﻿@model SpecificNewsViewModel
+
+<style>
+    .last_list a:visited {
+        color: white;
+    }
+</style>
+
+<link rel="stylesheet" href="~/css/style_stat.css" />
+
+<div class="block1">
+    <h1>@Model.News.Title</h1>
+    <div class="img">
+        @for (int i = 0; i < Model.RelatedTags.Count; i++)
+        {
+            var tagName = Model.RelatedTags[i].Name;
+            if (Model.RelatedTags[i] != Model.RelatedTags.Last())
+            {
+                tagName = tagName + " | ";
+            }
+            <a href="@Url.Action("AllNews", "News", new { tagId = Model.RelatedTags[i].Id })">@tagName</a>
+        }
     </div>
-    <div class="block2">
-        <span class="last_text">Останні новини</span>
-        <div class="last">
-            <ul class="last_list">
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news_actual">
-                    <a href="stat.html" class="none">Науковці довели існування Вінниці</a>
+    <img src="~/img/tim.png" />
+
+    <p class="text">
+        @Model.News.Content
+    </p>
+</div>
+<div class="block2">
+    <span class="last_text">Останні новини</span>
+    <div class="last">
+        <ul class="last_list">
+            @for (int i = 0; i < Model.TenLatestNews.Count; i++)
+            {
+                <li class="news_date">
+                    @Model.TenLatestNews[i].DateAdded.ToString("dd MMMM HH:mm", System.Globalization.CultureInfo.CreateSpecificCulture("uk-UA"))
                 </li>
-                <li class="news_date">28 березня, 20:30</li>
                 <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
+                    @Html.ActionLink(Model.TenLatestNews[i].Title, "News", null, new { newsId = Model.TenLatestNews[i].Id })
                 </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-                <li class="news_date">28 березня, 20:30</li>
-                <li class="news">
-                    <a href="stat.html" class="none">
-                        Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                        на пиво у місцевому барі
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="blur"></div>
-        <span class="all"><a href="all.html">Усі актуальні новини</a></span>
+            }
+        </ul>
     </div>
+    <div class="blur"></div>
+    <span class="all">
+        @Html.ActionLink("Усі актуальні новини", "AllNews")
+    </span>
 </div>

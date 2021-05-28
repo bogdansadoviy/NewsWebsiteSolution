@@ -1,41 +1,36 @@
-﻿<div class="block1">
+﻿@model NewsWebsite.Models.NewsIndexViewModel
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+<style>
+    .last_list a:visited {
+        color: white;
+    }
+</style>
+
+<div class="block1">
     <div class="list_block">
         <ul class="list">
-            <li>
-                @Html.ActionLink("Суспільство", "News")
-            </li>
-            <li>
-                @Html.ActionLink("Політика", "News")
-            </li>
-            <li>
-                @Html.ActionLink("Економіка", "News")
-            </li>
-            <li>
-                @Html.ActionLink("За кордоном", "News")
-            </li>
-            <li>
-                @Html.ActionLink("Курйози", "News")
-            </li>
+            @for (int i = 0; i < Model.FiveTags.Count; i++)
+            {
+                <li>
+                    @Html.ActionLink(Model.FiveTags[i].Name, "AllNews", null, new { tagId = Model.FiveTags[i].Id })
+                </li>
+            }
         </ul>
     </div>
     <span class="actual">Актуально</span>
     <div class="slider_block">
         <ul class="lazy slider">
-            <li>
-                <img src="img/tim.png" />
-            </li>
-            <li>
-                <img src="img/tim.png" />
-            </li>
-            <li>
-                <img src="img/tim.png" />
-            </li>
-            <li>
-                <img src="img/tim.png" />
-            </li>
-            <li>
-                <img src="img/tim.png" />
-            </li>
+            @for (int i = 0; i < Model.FiveLatestNews.Count; i++)
+            {
+                @*<li>
+                    @Html.ActionLink(Model.FiveLatestNews[i].Title, "News", null, new { newsId = Model.FiveLatestNews[i].Id })
+                </li>*@
+                <li>
+                    <img src="img/tim.png" />
+                </li>
+            }
         </ul>
     </div>
 </div>
@@ -43,76 +38,20 @@
     <span class="last_text">Останні новини</span>
     <div class="last">
         <ul class="last_list">
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news_actual">
-                <a href="stat.html" class="none">Науковці довели існування Вінниці</a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
-            <li class="news_date">28 березня, 20:30</li>
-            <li class="news">
-                <a href="stat.html" class="none">
-                    Харківчанин знайшов на вулиці 20 гривень, які одразу витратив
-                    на пиво у місцевому барі
-                </a>
-            </li>
+            @for (int i = 0; i < Model.TenLatestNews.Count; i++)
+            {
+                <li class="news_date">
+                    @Model.TenLatestNews[i].DateAdded.ToString("dd MMMM HH:mm", System.Globalization.CultureInfo.CreateSpecificCulture("uk-UA"))
+                </li>
+                <li class="news">
+                    @Html.ActionLink(Model.TenLatestNews[i].Title, "News", null, new { newsId = Model.TenLatestNews[i].Id })
+                </li>
+            }
         </ul>
     </div>
     <div class="blur"></div>
-    <span class="all"><a href="all.html">Усі актуальні новини</a></span>
+    <span class="all">
+        @Html.ActionLink("Усі актуальні новини", "AllNews")
+    </span>
 </div>
 

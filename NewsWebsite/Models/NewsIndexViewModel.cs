@@ -6,5 +6,6 @@ namespace NewsWebsite.Models
     {
         public List<NewsViewModel> FiveLatestNews { get; set; }
         public List<NewsViewModel> TenLatestNews { get; set; }
+        public List<TagViewModel> FiveTags { get; set; }
     }
 }

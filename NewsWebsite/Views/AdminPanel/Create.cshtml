@@ -1,10 +1,8 @@
 ﻿@model NewsWebsite.Models.NewsViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Створення нової новини";
 }
-
-<link rel="stylesheet" type="text/css" href="/css/good_style.css" />
 
 <h1>Створення нової новини</h1>
 
@@ -48,7 +46,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Повернутись до списку новин</a>
+    <a class="btn btn-light" asp-action="Index">Повернутись до списку новин</a>
 </div>
 
 @section Scripts {

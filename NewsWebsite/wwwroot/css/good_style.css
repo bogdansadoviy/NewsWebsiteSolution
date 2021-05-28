@@ -1,10 +1,14 @@
 .content {
     color: #333333;
-    display: block;
+    display: contents !important;
 }
 
-a {
-    color: #333333;
+label, h4, h1 {
+    color: #333333 !important;
+}
+
+.col-sm-2, .col-sm-10 {
+    color: #333333 !important;
 }
 
 h1 {
