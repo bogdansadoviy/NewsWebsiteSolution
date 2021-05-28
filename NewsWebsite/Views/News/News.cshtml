@@ -21,7 +21,7 @@
             <a href="@Url.Action("AllNews", "News", new { tagId = Model.RelatedTags[i].Id })">@tagName</a>
         }
     </div>
-    <img src="~/img/tim.png" />
+    <img src="@Model.News.TitleImagePath" />
 
     <p class="text">
         @Model.News.Content

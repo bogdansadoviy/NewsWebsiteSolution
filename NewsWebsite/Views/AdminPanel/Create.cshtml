@@ -1,4 +1,4 @@
-﻿@model NewsWebsite.Models.NewsViewModel
+﻿@model NewsWebsite.Models.NewsWithImageViewModel
 
 @{
     ViewData["Title"] = "Створення нової новини";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -23,9 +23,9 @@
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TitleImagePath" class="control-label">Зображення для новини</label>
-                <input asp-for="TitleImagePath" class="form-control" />
-                <span asp-validation-for="TitleImagePath" class="text-danger"></span>
+                <label asp-for="File" class="control-label">Зображення для новини</label>
+                <input name="File" type="file" asp-for="File" accept="image/png, image/gif, image/jpeg" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tags" class="control-label">Теги</label>

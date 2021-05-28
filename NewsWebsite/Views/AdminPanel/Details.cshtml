@@ -24,8 +24,8 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TitleImagePath)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TitleImagePath)
+        <dd class = "col-sm-10" >
+            <img src="@Model.TitleImagePath" style="object-fit: fill; width: inherit; height: inherit"/>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DateAdded)

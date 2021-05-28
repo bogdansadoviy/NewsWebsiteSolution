@@ -7,19 +7,26 @@ using NewsWebsite.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace NewsWebsite.Controllers
 {
     [Authorize]
     public class AdminPanelController : Controller
     {
+        private readonly string _imagesDirectory;
+
         private readonly ApplicationDbContext _context;
         private readonly TagService _tagService;
 
-        public AdminPanelController(ApplicationDbContext context, TagService tagService)
+        public AdminPanelController(ApplicationDbContext context, TagService tagService,
+            IWebHostEnvironment hostingEnviroment)
         {
             _tagService = tagService;
             _context = context;
+
+            _imagesDirectory = Path.Combine(hostingEnviroment.WebRootPath, "NewsData");
         }
 
         // GET: AdminPanel
@@ -56,26 +63,10 @@ namespace NewsWebsite.Controllers
         // GET: AdminPanel/Create
         public async Task<IActionResult> Create()
         {
-            var vm = new NewsViewModel();
+            var vm = new NewsWithImageViewModel();
             await _tagService.MapName(vm.Tags);
 
             return View(vm);
-        }
-
-        // POST: AdminPanel/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,TitleImagePath,DateAdded,TagIds")] NewsViewModel news)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(news.ToEntity());
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(news);
         }
 
         // GET: AdminPanel/Edit/5
@@ -103,7 +94,7 @@ namespace NewsWebsite.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,TitleImagePath,DateAdded,Tags")] NewsViewModel news)
+        public async Task<IActionResult> Edit(int id, NewsWithImageViewModel news)
         {
             if (id != news.Id)
             {
@@ -114,7 +105,8 @@ namespace NewsWebsite.Controllers
             {
                 try
                 {
-                    _context.Update(news.ToEntity());
+                    var filePath = SaveFileLocaly(news);
+                    _context.Update(news.ToNewsViewModel(@$"/NewsData/{news.File.FileName}").ToEntity());
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -153,6 +145,17 @@ namespace NewsWebsite.Controllers
             {
                 await _tagService.MapName(newsViewModel.Tags);
             }
+        }
+
+        private string SaveFileLocaly(NewsWithImageViewModel news)
+        {
+            var filePath = Path.Combine(_imagesDirectory, news.File.FileName);
+            using (var stream = System.IO.File.Create(filePath))
+            {
+                news.File.CopyTo(stream);
+            }
+
+            return filePath;
         }
     }
 }
